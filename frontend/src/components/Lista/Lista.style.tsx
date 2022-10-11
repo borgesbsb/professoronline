@@ -20,6 +20,10 @@ export const Listatyled = styled('ul')`
 
 `;
 
+export const ListaVazia = styled('h2')`
+    text-align: center;
+    padding: ${({theme}) => theme.spacing(20, 0)};
+`;
 
 export const ItemLista = styled('li')`
     list-style: none;

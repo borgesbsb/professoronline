@@ -1,47 +1,31 @@
 import { Button } from "@mui/material";
-import { Descricao, Foto, Informacoes, ItemLista, Listatyled, Nome, Valor } from "./Lista.style";
+import { Professor } from "../../@types/professor";
+import { Descricao, Foto, Informacoes, ItemLista, Listatyled, ListaVazia, Nome, Valor } from "./Lista.style";
 
-const Lista = (props) => {
+interface ListaProps {
+    professores: Professor[]
+}
+
+const Lista = (props: ListaProps ) => {
     return(
         <div>
-            <Listatyled>
-                <ItemLista>
-                     <Foto src="https://github.com/borgesbsb.png" ></Foto>
-                     <Informacoes>
-                        <Nome>Benjamin Borges</Nome>
-                        <Valor>R$ 200,00 por hora</Valor>
-                        <Descricao>Sistemas Empresariais</Descricao>
-                        <Button sx={{ width: '70%'}}>Marcar Aulas com Benjamin</Button>
-                     </Informacoes>
-                </ItemLista>
-                <ItemLista>
-                     <Foto src="https://github.com/borgesbsb.png" ></Foto>
-                     <Informacoes>
-                        <Nome>Benjamin Borges</Nome>
-                        <Valor>R$ 200,00 por hora</Valor>
-                        <Descricao>Sistemas Empresariais</Descricao>
-                        <Button sx={{ width: '70%'}}>Marcar Aulas com Benjamin</Button>
-                     </Informacoes>
-                </ItemLista>
-                <ItemLista>
-                     <Foto src="https://github.com/borgesbsb.png" ></Foto>
-                     <Informacoes>
-                        <Nome>Benjamin Borges</Nome>
-                        <Valor>R$ 200,00 por hora</Valor>
-                        <Descricao>Sistemas Empresariais</Descricao>
-                        <Button sx={{ width: '70%'}}>Marcar Aulas com Benjamin</Button>
-                     </Informacoes>
-                </ItemLista>               
-                <ItemLista>
-                     <Foto src="https://github.com/borgesbsb.png" ></Foto>
-                     <Informacoes>
-                        <Nome>Benjamin Borges</Nome>
-                        <Valor>R$ 200,00 por hora</Valor>
-                        <Descricao>Sistemas Empresariais</Descricao>
-                        <Button sx={{ width: '70%'}}>Marcar Aulas com Benjamin</Button>
-                     </Informacoes>
-                </ItemLista>
+           {props.professores.length > 0 ? (
+             <Listatyled>
+                {props.professores.map( professor => (
+                    <ItemLista key={professor.id} >
+                        <Foto src={professor.foto}></Foto>
+                        <Informacoes>
+                            <Nome>{professor.nome}</Nome>
+                            <Valor>{professor.valor_hora.toLocaleString('pt-Br', { minimumFractionDigits: 2, style: 'currency', currency: 'BRL'  } )}</Valor>
+                            <Descricao>{professor.descricao}</Descricao>
+                            <Button sx={{ width: '70%'}}>Marcar Aulas com Benjamin</Button>
+                        </Informacoes>
+                    </ItemLista>
+                ))}
             </Listatyled>
+           ) : (
+                <ListaVazia>Nenhum item encontrado</ListaVazia > 
+           ) }
         </div>
     )
 }
